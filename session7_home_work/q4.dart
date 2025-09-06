@@ -22,20 +22,8 @@ void main() {
     }
   }
   print('numbers:$numbers');
-  List<int> difference = [];
+  int difference = largest - smallest;
   print('largest number is $largest');
   print('smallest number is $smallest');
-  for (int i = 0; i < numbers.length - 1; i++) {
-    if (numbers[i] > numbers[i + 1]) {
-      difference.add(numbers[i] - numbers[i + 1]);
-    } else {
-      difference.add(numbers[i + 1] - numbers[i]);
-    }
-  }
-  if (numbers.last > numbers.first) {
-    difference.add(numbers.last - numbers.first);
-  } else {
-    difference.add(numbers.first - numbers.last);
-  }
-  print('difference between them:$difference');
+  print('difference between largest and smallest number is $difference');
 }
