@@ -1,5 +1,4 @@
-/*
-Q1
+/* Q1
  Design an OOP model for planning trip fuel across multiple vehicle types.
  Requirements:- Provide a general vehicle type with encapsulated core data
   (private fields) and validated constructors
