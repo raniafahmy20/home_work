@@ -23,23 +23,19 @@ void main() {
 
 double computeCost(double totalArea) {
   double totalCost = 0;
-  if (totalArea >= 50) {
-    totalCost += 50 * 1.50;
-    totalArea -= 50;
-    if (totalArea >= 100) {
-      totalCost += 100 * 1.25;
-      totalArea -= 100;
-      if (totalArea != 0) {
-        totalCost += totalArea * 1.00;
-      }
-    }
+  if (totalArea <= 50) {
+    totalCost = totalArea * 1.5;
+  } else if (totalArea <= 150) {
+    totalCost = (50 * 1.5) + (totalArea - 50) * 1.25;
+  } else {
+    totalCost = (50 * 1.5) + (totalArea - 150) * 1.0;
   }
   return totalCost;
 }
 
 class Shape {
-  double _height = 1;
-  double _width = 1;
+  double? _height;
+  double? _width;
   Shape(double height, double width) {
     this._height = height;
     this._width = width;
@@ -60,8 +56,8 @@ class Shape {
     }
   }
 
-  double get height => this._height;
-  double get width => this._width;
+  double get height => this._height!;
+  double get width => this._width!;
 
   double area() {
     return 0;
@@ -94,7 +90,7 @@ class Circle extends Shape {
     }
   }
 
-  double get raduis => this._height;
+  double get raduis => this._height!;
   @override
   double area() {
     return 0.5 * (22 / 7) * raduis * raduis;
@@ -115,7 +111,7 @@ class Square extends Shape {
     }
   }
 
-  double get side => this._height;
+  double get side => this._height!;
   @override
   double area() {
     return side * side;

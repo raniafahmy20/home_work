@@ -14,13 +14,20 @@
  type).
 */
 class Vehicle {
-  double _speed = 0;
-  double _thermostat = 0;
-  num _fuelConsuming = 0;
-  Vehicle(double speed, num fuelConsuming, double thermostat) {
+  double? _speed;
+  double? _thermostat;
+  num? _fuelConsumingPerLitre;
+  double? capacity;
+  Vehicle(
+    double speed,
+    num fuelConsumingPerLitre,
+    double thermostat,
+    double capacity,
+  ) {
     this.speed = speed;
     this.thermostat = thermostat;
-    this.fuelConsuming = fuelConsuming;
+    this.fuelConsumingPerLitre = fuelConsumingPerLitre;
+    this.capacity = capacity;
   }
   void set speed(double speed) {
     if (speed > 0) {
@@ -30,9 +37,9 @@ class Vehicle {
     }
   }
 
-  void set fuelConsuming(num fuelConsuming) {
-    if (fuelConsuming > 0) {
-      this._fuelConsuming = fuelConsuming;
+  void set fuelConsumingPerLitre(num fuelConsumingPerLitre) {
+    if (fuelConsumingPerLitre > 0) {
+      this._fuelConsumingPerLitre = fuelConsumingPerLitre;
     } else {
       print('InValid');
     }
@@ -46,34 +53,40 @@ class Vehicle {
     }
   }
 
-  double get speed => this._speed;
-  double get thermostat => this._thermostat;
-  num get fuelConsuming => this._fuelConsuming;
+  double get speed => this._speed!;
+  double get thermostat => this._thermostat!;
+  num get fuelConsumingPerLitre => this._fuelConsumingPerLitre!;
 
   num fuelComputation(double distance) {
     num fuel = 0;
     if (thermostat > 500) {
-      fuel = 20 / 100 * fuelConsuming * distance;
+      fuel = 20 / 100 * fuelConsumingPerLitre * distance;
     } else {
-      fuel = fuelConsuming * distance;
+      fuel = fuelConsumingPerLitre * distance;
     }
     return fuel;
   }
 }
 
 class Car extends Vehicle {
-  bool _airConditioning = true;
-  Car(double speed, num fuelConsuming, double thermostat, bool airConditioning)
-    : super(1.0, 1, 1.0) {
-    this.fuelConsuming = fuelConsuming;
+  bool? _airConditioning;
+  Car(
+    double speed,
+    num fuelConsumingPerLitre,
+    double thermostat,
+    double capacity,
+    bool airConditioning,
+  ) : super(1.0, 1, 1.0, 1) {
+    this.fuelConsumingPerLitre = fuelConsumingPerLitre;
     this.thermostat = thermostat;
+    this.capacity = capacity;
     this.airConditioning = airConditioning;
   }
   void set airConditioning(bool airConditioning) {
     this._airConditioning = airConditioning;
   }
 
-  bool get airConditioning => this._airConditioning;
+  bool get airConditioning => this._airConditioning!;
   @override
   num fuelComputation(double distance) {
     num fuel = super.fuelComputation(distance);
@@ -85,11 +98,17 @@ class Car extends Vehicle {
 }
 
 class Truck extends Vehicle {
-  double _Weight = 0; //carring
-  Truck(double speed, num fuelConsuming, double thermostat, double weight)
-    : super(1, 1, 1) {
-    this.fuelConsuming = fuelConsuming;
+  double? _Weight; //carring
+  Truck(
+    double speed,
+    num fuelConsumingPerLitre,
+    double thermostat,
+    double capacity,
+    double weight,
+  ) : super(1, 1, 1, 1) {
+    this.fuelConsumingPerLitre = fuelConsumingPerLitre;
     this.weight = weight;
+    this.capacity = capacity;
     this.thermostat = thermostat;
   }
   void set weight(double weight) {
@@ -98,7 +117,7 @@ class Truck extends Vehicle {
     }
   }
 
-  double get weight => this._Weight;
+  double get weight => this._Weight!;
   @override
   num fuelComputation(double distance) {
     num fuel = super.fuelComputation(distance);
@@ -112,23 +131,21 @@ class Truck extends Vehicle {
 }
 
 void main() {
-  List<double> tripDistance = [6000, 4000, 45500, 9800];
-  Car car = Car(2000, 22, 8000, true);
-  Truck truck = Truck(500, 22, 578, 1000);
+  List<double> tripDistance = [6000, 9800];
+  Car car = Car(2000, 22, 8000, 500000, true);
+  Truck truck = Truck(500, 22, 578, 800, 1000);
   List<Vehicle> vehicle = [car, truck];
+  double totalFuel = 0;
   vehicle.forEach((Vehicle item) {
+    totalFuel = 0;
     tripDistance.forEach((double distance) {
-      print('total fuel of $item :${item.fuelComputation(distance)}');
-      print('if is complete route :${isComplete(item, distance)}');
+      totalFuel += item.fuelComputation(distance);
     });
+    print(totalFuel);
+    if (totalFuel <= item.capacity!) {
+      print('$item is complete trip');
+    } else {
+      print('$item is not complete trip');
+    }
   });
-}
-
-bool isComplete(Vehicle vehicle, double distance) {
-  bool iscomplete = true;
-  if (vehicle.fuelComputation(distance) > 50000) {
-    print('$vehicle is not completeted route');
-    iscomplete = false;
-  }
-  return iscomplete;
 }
