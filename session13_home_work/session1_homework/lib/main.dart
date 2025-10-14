@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:session1_homework/widgets/firstSectionAfterLine.dart';
 import 'package:session1_homework/widgets/forthSectionAfterLine.dart';
-import 'package:session1_homework/widgets/secondSecyionAfterLine.dart';
-import 'package:session1_homework/widgets/sectionBeforeStraightLine.dart';
-import 'package:session1_homework/widgets/thirdSecyionAfterLine.dart';
+import 'package:session1_homework/widgets/secondSectionAfterLine.dart';
+import 'package:session1_homework/widgets/sectionBeforeLine.dart';
+import 'package:session1_homework/widgets/thirdSectionAfterLine.dart';
 
 void main() {
   runApp(const MyApp());
