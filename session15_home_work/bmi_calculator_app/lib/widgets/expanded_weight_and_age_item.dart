@@ -1,18 +1,22 @@
 import 'package:bmi_calculator_app/widgets/custom_button_icon.dart';
 import 'package:flutter/material.dart';
 
-class WeightAndAgeItem extends StatefulWidget {
+class ExpandedWeightAndAgeItem extends StatefulWidget {
   late String cardName;
   static int cardValueWeight = 70;
   int? cardValueAge;
 
-  WeightAndAgeItem({super.key, required this.cardName, this.cardValueAge});
+  ExpandedWeightAndAgeItem({
+    super.key,
+    required this.cardName,
+    this.cardValueAge,
+  });
 
   @override
-  State<WeightAndAgeItem> createState() => _WeightAndAgeItemState();
+  State<ExpandedWeightAndAgeItem> createState() => _WeightAndAgeItemState();
 }
 
-class _WeightAndAgeItemState extends State<WeightAndAgeItem> {
+class _WeightAndAgeItemState extends State<ExpandedWeightAndAgeItem> {
   // int get myWeight => widget.cardValue;
 
   @override
@@ -26,7 +30,7 @@ class _WeightAndAgeItemState extends State<WeightAndAgeItem> {
             children: [
               Text(widget.cardName, style: TextStyle(color: Color(0xFF8D8D99))),
               Text(
-                '${widget.cardValueAge == null ? WeightAndAgeItem.cardValueWeight : widget.cardValueAge}',
+                '${widget.cardValueAge == null ? ExpandedWeightAndAgeItem.cardValueWeight : widget.cardValueAge}',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -41,7 +45,7 @@ class _WeightAndAgeItemState extends State<WeightAndAgeItem> {
                     action: () {
                       setState(() {
                         if (widget.cardValueAge == null) {
-                          WeightAndAgeItem.cardValueWeight--;
+                          ExpandedWeightAndAgeItem.cardValueWeight--;
                         } else {
                           widget.cardValueAge = widget.cardValueAge! - 1;
                         }
@@ -54,7 +58,7 @@ class _WeightAndAgeItemState extends State<WeightAndAgeItem> {
                     action: () {
                       setState(() {
                         if (widget.cardValueAge == null) {
-                          WeightAndAgeItem.cardValueWeight++;
+                          ExpandedWeightAndAgeItem.cardValueWeight++;
                         } else {
                           widget.cardValueAge = widget.cardValueAge! + 1;
                         }

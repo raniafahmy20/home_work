@@ -1,4 +1,4 @@
-import 'package:bmi_calculator_app/widgets/weight_and_age_item.dart';
+import 'package:bmi_calculator_app/widgets/expanded_weight_and_age_item.dart';
 import 'package:flutter/material.dart';
 
 class WeightAndAgeSection extends StatelessWidget {
@@ -10,9 +10,9 @@ class WeightAndAgeSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          WeightAndAgeItem(cardName: 'WEIGHT'),
-          SizedBox(width: 15),
-          WeightAndAgeItem(cardName: 'AGE', cardValueAge: 45),
+          ExpandedWeightAndAgeItem(cardName: 'WEIGHT'),
+          const SizedBox(width: 15),
+          ExpandedWeightAndAgeItem(cardName: 'AGE', cardValueAge: 45),
         ],
       ),
     );

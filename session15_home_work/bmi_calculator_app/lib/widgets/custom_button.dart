@@ -10,7 +10,14 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+        if (buttonName == 'CALCULATE') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        } else {
+          Navigator.pop(context, MaterialPageRoute(builder: (context) => page));
+        }
       },
       child: Container(
         width: 500,
