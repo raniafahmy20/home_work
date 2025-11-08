@@ -30,7 +30,15 @@ class CustomNextBackPage extends StatelessWidget {
                 children: [
                   Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 15),
                   SizedBox(width: 18),
-                  Text('Back', style: TextStyle(color: Colors.white)),
+                  Text(
+                    'Back',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Gilroy',
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -45,7 +53,15 @@ class CustomNextBackPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Row(
                 children: [
-                  Text('Next', style: TextStyle(color: Colors.white)),
+                  Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Gilroy',
+                    ),
+                  ),
                   SizedBox(width: 18),
                   Icon(
                     Icons.arrow_forward_ios_outlined,

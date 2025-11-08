@@ -5,8 +5,11 @@ import 'package:quiz_app/widgets/custom_answer_radio_widget.dart';
 class QuestionWidgetRadio extends StatefulWidget {
   QuestionModel questionModel;
   int numberOfQuestion;
+  QuizApp quizApp;
+
   QuestionWidgetRadio({
     super.key,
+    required this.quizApp,
     required this.questionModel,
     required this.numberOfQuestion,
   });
@@ -16,64 +19,56 @@ class QuestionWidgetRadio extends StatefulWidget {
 }
 
 class _QuestionWidgetRadioState extends State<QuestionWidgetRadio> {
-  String answer1 = 'answer1';
-
-  String answer2 = 'answer2';
-
-  String answer3 = 'answer3';
-
-  String answer4 = 'answer4';
-
-  String? value;
+  List<String> valuesOfOptions = ['answer1', 'answer2', 'answer3', 'answer4'];
+  String value = '';
 
   @override
   Widget build(BuildContext context) {
     return RadioGroup(
       groupValue: value,
-      onChanged: (value) {
-        this.value = value!;
+      onChanged: (val) {
+        setState(() {
+          value = val!;
+        });
       },
-      child: Column(
-        spacing: 7,
-        children: [
-          CustomAnswerRadioWidget(
-            onChange: (val) {
-              value = val!;
-              setState(() {});
-            },
-            color: value == answer1 ? Color(0xFFC2BDFA) : Color(0xFFFFFFFF),
-            radioText: widget.questionModel.firstAnswer,
-            radioValue: answer1,
-          ),
-          CustomAnswerRadioWidget(
-            onChange: (val) {
-              value = val!;
-              setState(() {});
-            },
-            radioText: widget.questionModel.secondAnswer,
-            radioValue: answer2,
-            color: value == answer2 ? Color(0xFFC2BDFA) : Color(0xFFFFFFFF),
-          ),
-          CustomAnswerRadioWidget(
-            onChange: (val) {
-              value = val!;
-              setState(() {});
-            },
-            radioText: widget.questionModel.thirdAnswer,
-            radioValue: answer3,
-            color: value == answer3 ? Color(0xFFC2BDFA) : Color(0xFFFFFFFF),
-          ),
-          CustomAnswerRadioWidget(
-            onChange: (val) {
-              value = val!;
-              setState(() {});
-            },
-            color: value == answer4 ? Color(0xFFC2BDFA) : Color(0xFFFFFFFF),
-            radioText: widget.questionModel.forthAnswer,
-            radioValue: answer4,
-          ),
-        ],
-      ),
+      child: Column(spacing: 7, children: getAnswer(valuesOfOptions, value)),
     );
+  }
+
+  List<Widget> getAnswer(List<String> values, String currentValue) {
+    List<Widget> answers = [];
+
+    for (int i = 0; i < widget.questionModel.options.length; i++) {
+      answers.add(
+        CustomAnswerRadioWidget(
+          isSelect: currentValue == values[i],
+          onChange: (val) {
+            setState(() {
+              value = val!; // تحديث قيمة الـ state
+              widget.quizApp.selectOption(
+                widget.questionModel,
+                widget.questionModel.options[i],
+              );
+              widget.quizApp.update(
+                widget.questionModel,
+                widget.questionModel.options[i],
+              );
+              for (var element in widget.questionModel.selsectedAnswers!) {
+                print('ggggggggg');
+                print('all:$element');
+              }
+            });
+          },
+          colors: currentValue == values[i]
+              ? [const Color(0xFFB8B2FF), const Color(0xFFC6C2F8)]
+              : [Colors.white, Colors.white],
+          radioText: widget.questionModel.options[i],
+          radioValue: values[i],
+          groupValue: value,
+        ),
+      );
+    }
+
+    return answers;
   }
 }

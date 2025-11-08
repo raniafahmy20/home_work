@@ -4,34 +4,30 @@ import 'package:quiz_app/widgets/custom_anser_widget.dart';
 
 class QuestionWidgetCheck extends StatelessWidget {
   QuestionModel questionModel;
-  QuestionWidgetCheck({super.key, required this.questionModel});
+  QuizApp quizApp;
+  QuestionWidgetCheck({
+    super.key,
+    required this.questionModel,
+    required this.quizApp,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 12,
-      children: [
+    return Column(spacing: 12, children: getCheckAnswer(questionModel));
+  }
+
+  List<Widget> getCheckAnswer(QuestionModel ques) {
+    List<Widget> widgets = [];
+    for (var element in ques.options) {
+      widgets.add(
         CustomAnserWidget(
-          text: questionModel.firstAnswer,
+          text: element,
           isCheck: false,
+          quizApp: quizApp,
           questionModel: questionModel,
         ),
-        CustomAnserWidget(
-          text: questionModel.secondAnswer,
-          isCheck: false,
-          questionModel: questionModel,
-        ),
-        CustomAnserWidget(
-          text: questionModel.thirdAnswer,
-          isCheck: false,
-          questionModel: questionModel,
-        ),
-        CustomAnserWidget(
-          text: questionModel.forthAnswer,
-          isCheck: false,
-          questionModel: questionModel,
-        ),
-      ],
-    );
+      );
+    }
+    return widgets;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/text_style_model.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -28,7 +29,11 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Color(0xFF39106D)),
+          style: TextStyle(
+            fontFamily: 'Gilroy',
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+          ),
         ),
       ),
     );

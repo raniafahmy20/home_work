@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/models/question_model.dart';
-import 'package:quiz_app/widgets/custom_anser_widget.dart';
+import 'package:quiz_app/models/text_style_model.dart';
+
 import 'package:quiz_app/widgets/question_widget_check.dart';
 import 'package:quiz_app/widgets/question_widget_radio.dart';
 
 class QuestionWidget extends StatelessWidget {
   QuestionModel questionModel;
+  QuizApp quizApp;
   int numberOfQuestion;
   QuestionWidget({
     super.key,
+    required this.quizApp,
     required this.questionModel,
     required this.numberOfQuestion,
   });
 
   @override
   Widget build(BuildContext context) {
+    print(questionModel.title);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 15,
-
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 10),
@@ -35,23 +38,24 @@ class QuestionWidget extends StatelessWidget {
                   Image(image: AssetImage('assets/v.png'), fit: BoxFit.cover),
                   Text(
                     'Question $numberOfQuestion',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyleModel.h4(),
                   ),
                 ],
               ),
             ),
           ),
         ),
-        Text(
-          questionModel.title,
-          style: TextStyle(fontSize: 24, color: Colors.white),
-        ),
-        numberOfQuestion == 1
+        Text(questionModel.title, style: TextStyleModel.h1()),
+        questionModel.correctAnswer.length == 1
             ? QuestionWidgetRadio(
                 questionModel: questionModel,
                 numberOfQuestion: numberOfQuestion,
+                quizApp: quizApp,
               )
-            : QuestionWidgetCheck(questionModel: questionModel),
+            : QuestionWidgetCheck(
+                questionModel: questionModel,
+                quizApp: quizApp,
+              ),
       ],
     );
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/question_model.dart';
 
 class ResultQuizPage extends StatelessWidget {
-  const ResultQuizPage({super.key});
+  QuizApp quizApp;
+  ResultQuizPage({super.key, required this.quizApp});
 
   @override
   Widget build(BuildContext context) {
@@ -9,9 +11,10 @@ class ResultQuizPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            begin: AlignmentGeometry.bottomLeft,
-            end: AlignmentGeometry.topRight,
-            colors: [Color(0xFF1D1E2F), Color(0xFF50426C), Color(0xFF1B1936)],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+
+            colors: [Color(0xFF060B26), Color(0xFF1A1F37)],
           ),
         ),
         child: Padding(
@@ -26,7 +29,10 @@ class ResultQuizPage extends StatelessWidget {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('your result is:'), Text('Not Problem')],
+                  children: [
+                    Text('your result is:'),
+                    Text('${quizApp.calculateCorrectAnswer()}'),
+                  ],
                 ),
               ),
             ),
