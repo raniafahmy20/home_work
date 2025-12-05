@@ -63,6 +63,8 @@ class _WeightAndAgeItemState extends State<ExpandedWeightAndAgeItem> {
                           widget.cardValueAge = widget.cardValueAge! + 1;
                         }
                       });
+                      print('ssssssssssssssssssssssssssssssss');
+                      print(ExpandedWeightAndAgeItem.cardValueWeight);
                     },
                   ),
                 ],
