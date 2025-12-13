@@ -22,6 +22,7 @@ class SearchPage extends StatelessWidget {
         child: Center(
           child: TextField(
             onSubmitted: (value) async {
+              
               var getWeather = BlocProvider.of<GetWeatherCubit>(context);
               getWeather.getWeatherData(value);
               Navigator.pop(context);
