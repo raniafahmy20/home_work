@@ -3,14 +3,14 @@ import 'package:dio/dio.dart';
 
 class ChatServices {
   final Dio dio;
-  final String geminiApiKey = 'AIzaSyDbCNtcltXwuf8PjsGAIlUaYGEkVZyviJU';
+
+  final String geminiApiKey = 'AIzaSyBWDxhb7rmXgKstPLDUuyE6ktxseQ-0DAk';
   late final String url =
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$geminiApiKey";
 
   ChatServices({required this.dio});
 
   Future<QuestionModel> sendQuestion(String titleOfQuestion) async {
-    print('${titleOfQuestion}');
     try {
       final response = await dio.post(
         url,

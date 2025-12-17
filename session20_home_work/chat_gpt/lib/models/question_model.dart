@@ -5,13 +5,6 @@ class QuestionModel {
   QuestionModel({required this.title, required this.anser});
 }
 
-class ChatApp {
-  List<QuestionModel> questions = [];
-  void addQuestion(QuestionModel question) {
-    questions.add(question);
-  }
-}
-
 class Message {
   final String title;
   final bool isUser;

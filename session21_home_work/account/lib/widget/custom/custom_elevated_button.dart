@@ -1,3 +1,4 @@
+import 'package:account/thems/text_style_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -28,14 +29,7 @@ class CustomElevatedButton extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.2,
-            ),
-          ),
+          child: Text(title, style: TextStyleModel.textStyleTextInButton()),
         ),
       ),
     );

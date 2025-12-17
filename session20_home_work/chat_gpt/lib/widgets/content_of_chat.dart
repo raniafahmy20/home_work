@@ -1,6 +1,5 @@
 import 'package:chat_gpt/cubits/chat_cubit.dart';
 import 'package:chat_gpt/cubits/chat_states.dart';
-import 'package:chat_gpt/models/question_model.dart';
 import 'package:chat_gpt/services/chat_service.dart';
 import 'package:chat_gpt/widgets/answer_loading.dart';
 import 'package:chat_gpt/widgets/answer_widget_from_chat.dart';
@@ -10,14 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ContentOfChat extends StatefulWidget {
-  final ChatApp chatApp;
   final ChatServices chatServices;
-
-  const ContentOfChat({
-    super.key,
-    required this.chatApp,
-    required this.chatServices,
-  });
+  const ContentOfChat({super.key, required this.chatServices});
 
   @override
   State<ContentOfChat> createState() => _ContentOfChatState();
@@ -58,10 +51,29 @@ class _ContentOfChatState extends State<ContentOfChat> {
         if (state is InitialChatState) {
           return InfoOfApp();
         }
-
         final messages = ChatCubit.get(context).messagesList;
+        return ListView.builder(
+          key: _listKey,
+          controller: _scrollController,
+          itemCount: messages.length,
+          itemBuilder: (context, index) {
+            if (index >= messages.length) return const SizedBox.shrink();
+            final message = messages[index];
 
-        return AnimatedList(
+            Widget child;
+            if (message.isLoading) {
+              child = AnswerLoadingWidget();
+            } else if (message.isUser) {
+              child = QuestionWidgetFronUser(question: message.title);
+            } else {
+              child = AnswerWidgetFromChat(answer: message.title);
+            }
+
+            return child;
+          },
+        );
+
+        /*AnimatedList(
           key: _listKey,
           controller: _scrollController,
           initialItemCount: messages.length,
@@ -80,7 +92,7 @@ class _ContentOfChatState extends State<ContentOfChat> {
 
             return SizeTransition(sizeFactor: animation, child: child);
           },
-        );
+        );*/
       },
     );
   }

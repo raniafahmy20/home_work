@@ -9,8 +9,9 @@ class ChatCubit extends Cubit<ChatStates> {
   static ChatCubit get(BuildContext context) =>
       BlocProvider.of<ChatCubit>(context);
   List<Message> messagesList = [];
+ // Stream<Message> get dataStream => Stream.fromIterable(messagesList);
 
-  getChat({
+  Future<void> getChat({
     required ChatServices chatServices,
     required String questionTitle,
   }) async {

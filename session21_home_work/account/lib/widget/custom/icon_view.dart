@@ -1,3 +1,4 @@
+import 'package:account/thems/box_decoration_model.dart';
 import 'package:flutter/material.dart';
 
 class IconView extends StatelessWidget {
@@ -9,17 +10,7 @@ class IconView extends StatelessWidget {
     return Container(
       width: 100,
       height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
+      decoration: BoxDecorationModel.decorationIconView(),
       child: Icon(iconData, size: 50, color: Colors.white),
     );
   }

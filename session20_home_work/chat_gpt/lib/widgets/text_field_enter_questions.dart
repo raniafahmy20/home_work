@@ -1,4 +1,5 @@
 import 'package:chat_gpt/cubits/chat_cubit.dart';
+import 'package:chat_gpt/cubits/chat_states.dart';
 import 'package:chat_gpt/preparing/image_moddel.dart';
 import 'package:chat_gpt/preparing/text_style_model.dart';
 import 'package:chat_gpt/services/chat_service.dart';
@@ -62,7 +63,6 @@ class _TextFieldEnterQuestionsState extends State<TextFieldEnterQuestions> {
               onChanged: (value) {
                 questionTitle = value;
               },
-              onSubmitted: (value) {},
             ),
           ),
 
@@ -74,24 +74,32 @@ class _TextFieldEnterQuestionsState extends State<TextFieldEnterQuestions> {
               image: DecorationImage(image: AssetImage(ImageModdel.microphone)),
             ),
           ),
-          GestureDetector(
-            onTap: () async {
-              textController.clear();
-              setState(() {});
-              var questionModel = BlocProvider.of<ChatCubit>(context);
-              await questionModel.getChat(
-                chatServices: widget.chatServices,
-                questionTitle: questionTitle,
+
+          BlocBuilder<ChatCubit, ChatStates>(
+            builder: (context, state) {
+              return AbsorbPointer(
+                absorbing: state is LoadingChatAnswerState,
+                child: GestureDetector(
+                  onTap: () async {
+                    textController.clear();
+                    setState(() {});
+                    var questionModel = BlocProvider.of<ChatCubit>(context);
+                    await questionModel.getChat(
+                      chatServices: widget.chatServices,
+                      questionTitle: questionTitle,
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(ImageModdel.sendImage),
+                      ),
+                    ),
+                  ),
+                ),
               );
             },
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(ImageModdel.sendImage),
-                ),
-              ),
-            ),
           ),
         ],
       ),

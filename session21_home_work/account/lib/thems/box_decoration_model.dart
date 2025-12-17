@@ -16,20 +16,6 @@ class BoxDecorationModel {
     );
   }
 
-  static BoxDecoration decorationFormLoginScreen() {
-    return BoxDecoration(
-      color: Colors.white.withOpacity(0.95),
-      borderRadius: BorderRadius.circular(20),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          blurRadius: 30,
-          offset: const Offset(0, 15),
-        ),
-      ],
-    );
-  }
-
   static BoxDecoration decorationSignUpScreen() {
     return BoxDecoration(
       gradient: LinearGradient(
@@ -44,7 +30,7 @@ class BoxDecorationModel {
     );
   }
 
-  static BoxDecoration decorationFormSignUp() {
+  static BoxDecoration decorationFormScreen() {
     return BoxDecoration(
       color: Colors.white.withOpacity(0.95),
       borderRadius: BorderRadius.circular(20),
@@ -53,6 +39,20 @@ class BoxDecorationModel {
           color: Colors.black.withOpacity(0.1),
           blurRadius: 30,
           offset: const Offset(0, 15),
+        ),
+      ],
+    );
+  }
+
+  static BoxDecoration decorationIconView() {
+    return BoxDecoration(
+      color: Colors.white.withOpacity(0.2),
+      shape: BoxShape.circle,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.1),
+          blurRadius: 20,
+          offset: const Offset(0, 10),
         ),
       ],
     );

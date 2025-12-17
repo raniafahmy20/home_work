@@ -1,5 +1,4 @@
 import 'package:chat_gpt/cubits/chat_cubit.dart';
-import 'package:chat_gpt/models/question_model.dart';
 import 'package:chat_gpt/preparing/image_moddel.dart';
 import 'package:chat_gpt/services/chat_service.dart';
 import 'package:chat_gpt/widgets/app_bar_chat.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatView extends StatelessWidget {
   final ChatServices chatServices = ChatServices(dio: Dio());
-  ChatApp chatApp = ChatApp();
   ChatView({super.key});
 
   @override
@@ -20,6 +18,9 @@ class ChatView extends StatelessWidget {
       create: (context) => ChatCubit(),
       child: Scaffold(
         appBar: AppBar(
+          shadowColor: Colors.white,
+          backgroundColor: Colors.white,
+          elevation: 0,
           leading: IconButton(
             onPressed: () {
               Navigator.of(context).pop();
@@ -42,12 +43,7 @@ class ChatView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Expanded(
-                child: ContentOfChat(
-                  chatApp: chatApp,
-                  chatServices: chatServices,
-                ),
-              ),
+              Expanded(child: ContentOfChat(chatServices: chatServices)),
               TextFieldEnterQuestions(chatServices: chatServices),
             ],
           ),

@@ -1,3 +1,4 @@
+import 'package:account/thems/text_style_model.dart';
 import 'package:flutter/material.dart';
 
 class TextButtonUnderline extends StatelessWidget {
@@ -13,16 +14,7 @@ class TextButtonUnderline extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(
-        title,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          decoration: TextDecoration.underline,
-          decorationColor: Colors.white,
-        ),
-      ),
+      child: Text(title, style: TextStyleModel.textStyleTextButtonUnderLine()),
     );
   }
 }
